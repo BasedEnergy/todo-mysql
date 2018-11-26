@@ -2,7 +2,7 @@ $(document).ready(function () {
     var $newItemInput = $("input.new-item");
     var $todoContainer = $(".todo-container");
     var $dateRow = $(".date-row");
-    $(document).on("click", "button.delete", deleteTodo);
+    // $(document).on("click", "button.delete", deleteTodo);
     $(document).on("click", "button.complete", toggleComplete);
     $(document).on("click", ".todo-item", editTodo);
     $(document).on("keyup", ".todo-item", finishEdit);
@@ -16,7 +16,7 @@ $(document).ready(function () {
     showDate();
 
     function showDate() {
-        var date = moment().format("ddd MMM Do YYYY");
+        var date = moment().format("ddd, MMM Do YYYY");
         $dateRow.prepend(date);
     }
 
@@ -36,16 +36,16 @@ $(document).ready(function () {
         });
     }
 
-    function deleteTodo(event) {
-        event.stopPropagation();
-        var id = $(this).data("id");
-        $.ajax({
-            method: "DELETE",
-            url: "/api/todos/" + id
-        }).then(function(){
-            socket.emit('new-change');
-        })
-    }
+    // function deleteTodo(event) {
+    //     event.stopPropagation();
+    //     var id = $(this).data("id");
+    //     $.ajax({
+    //         method: "DELETE",
+    //         url: "/api/todos/" + id
+    //     }).then(function(){
+    //         socket.emit('new-change');
+    //     })
+    // }
 
     function editTodo() {
         var currentTodo = $(this).data("todo");
@@ -58,6 +58,18 @@ $(document).ready(function () {
     function toggleComplete(event) {
         event.stopPropagation();
         var todo = $(this).parent().data("todo");
+
+        if(todo.complete){
+            var id = $(this).parent().data("id");
+            $.ajax({
+                method: "DELETE",
+                url: "/api/todos/" + id
+            }).then(function(){
+                socket.emit('new-change');
+            })
+            return;
+        }
+
         todo.complete = !todo.complete;
         updateTodo(todo);
     }
@@ -96,19 +108,18 @@ $(document).ready(function () {
         var $newInputRow = $(
             [
                 "<li class='list-group-item todo-item'>",
-                "<span>",
+                "<span class='todo-text'>",
                 todo.text,
                 "</span>",
+                "<button class='complete btn btn-primary'><i class='"+ (todo.complete? "far fa-dot-circle" : "far fa-circle") +"'></i></button>",
                 "<input type='text' class='edit' style='display: none;'>",
-                "<button class='delete btn btn-danger'><i class='far fa-times-circle'></i></button>",
-                "<button class='complete btn btn-primary'><i class='far fa-check-circle'></i></button>",
                 "</li>"
             ].join("")
         );
 
-        $newInputRow.find("button.delete").data("id", todo.id);
+        // $newInputRow.find("button.delete").data("id", todo.id);
         $newInputRow.find("input.edit").css("display", "none");
-        $newInputRow.data("todo", todo);
+        $newInputRow.data({"todo": todo,"id": todo.id});
         if (todo.complete) {
             $newInputRow.find("span").css("text-decoration", "line-through");
         }

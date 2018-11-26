@@ -13,6 +13,10 @@
 </head>
 
 <body>
+    <ul id="title">
+        <li id="title1">Devin's</li>
+        <li id="title2">TO DO LIST</li>
+    </ul>
     <div class="container" id="todo-container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
@@ -20,19 +24,19 @@
                     <li class="new-date">
                         <div class="container">
                             <div class="row">
-                                <div class="col-10">
+                                <div class="col-10 aligner">
                                     <div class="date-row">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </li>
-                    <li class="list-group-item new-item">
+                    <li class="list-group-item new-item" id='newItem'>
                         <form id="todo-form">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-10">
-                                        <input class="new-item form-control" type="text" />
+                                    <div class="col-10 aligner">
+                                        <input id = "newItemText" class="new-item form-control" type="text" placeholder="New to do" autocomplete="off" />
                                     </div>
                                 </div>
                             </div>

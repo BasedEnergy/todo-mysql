@@ -7,26 +7,55 @@ html, body {
 body{
     background-color: #f0efe9;
     color: #5e6170;
+    background-image: url(/assets/Atlsky.jpg);
+    background-size: cover;
+}
+
+#title {
+    display: none;
+    position: absolute;
+    color: white;
+    top: 20%;
+    left: 10%;
+}
+
+#title1{
+    font-size: 175%;
+    opacity: 0.5;
+}
+
+#title2{
+    font-size: 130%;
+    font-weight:bold;
 }
 
 #todo-container{
-    margin: auto;
+    /* margin: auto; */
     margin-top: 24px; 
     width: 300px;
     box-shadow: 0 0 10px rgba(0,0,0,0.6);
     -moz-box-shadow: 0 0 10px rgba(0,0,0,0.6);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.6);
     -o-box-shadow: 0 0 10px rgba(0,0,0,0.6);
+
+    margin: 0;
+    float: right;
 }
 
 .todo-list{
     background-color: #ffffff; 
+    padding-top: 36px;
+    opacity: 0.8;
 }
 
 .todo-item{
     border: none;
     padding-left: 14px;
     padding-bottom: 20px;
+}
+
+#todo-container, .row, .col-md-6, .todo-list{
+    height: 100%;
 }
 
 .col-10{
@@ -39,7 +68,55 @@ body{
     border: none;
 }
 
+.new-date {
+    margin-bottom: 36px;
+    margin-left: 22px;
+    font-size: 150%;
+}
+
+#newItemText {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border-bottom: 1px solid #5e6170;
+    padding-bottom: 7px;
+    margin-left: 24px;
+    width: 163px;
+    font-size: 125%;
+}
+
+.aligner{
+    text-align: left;
+}
+
+.todo-text {
+    border-bottom: 1px solid #5e6170;
+    display: inline-block;
+    width: 150px;
+    padding-bottom: 4px;
+    color: black;
+}
+
 .btn {
     background: none;
     border: none;
+    float: left;
+}
+
+#mobile-view {
+    display: none;
+}
+
+@media only screen and (min-width: 600px){
+
+    #newItem {
+        position: absolute;
+        bottom: 0;
+        right: 110px;
+    }
+
+    #title{
+        display: block;
+    }
+
 }
